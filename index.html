@@ -11,26 +11,45 @@
         <!-- Providing context about the project -->
         HCI Project | Yasaswini Reddy S | 2020B1A71892P
     </header>
-    <h1>Color Builder</h1>
-    <main>
-        <section id="color-selection">
-            <!-- Label for color picker -->
-            <label for="colorPicker">Select Color Swatches</label>
-            <!-- Input for selecting a color -->
-            <input type="color" id="colorPicker" aria-label="Color Picker">
-            <!-- Swatch container -->
-            <div id="swatches-container" aria-label="Selected Colors">
-                <!-- Context menu -->
-                <div id="context-menu">
-                    <div id="delete-swatch">Delete Swatch</div>
-                    <div id="change-color">Change Color</div>
+    <h1>COLOR BUILDER</h1>
+    <hr>
+        <div class="content-wrapper">
+            <!-- Left side content -->
+            <div class="left-content">
+                <p>Here's some text on the left side of the screen.
+                     You can place any content you want here, like an introduction to your color builder tool or 
+                     instructions on how to use it.Here's some text on the left side of the screen.
+                     You can place any content you want here, like an introduction to your color builder tool or 
+                     instructions on how to use it.Here's some text on the left side of the screen.
+                     You can place any content you want here, like an introduction to your color builder tool or 
+                     instructions on how to use it.Here's some text on the left side of the screen.
+                     You can place any content you want here, like an introduction to your color builder tool or 
+                     instructions on how to use it.Here's some text on the left side of the screen.
+                     You can place any content you want here, like an introduction to your color builder tool or 
+                     instructions on how to use it.</p>
+            </div>
+        
+            <!-- Right side content (color selection and swatches container) -->
+            <div class="right-content">
+                <section id="color-selection">
+                    <label for="colorPicker">Select Color Swatches</label>
+                    <input type="color" id="colorPicker" aria-label="Color Picker">
+                    <div id="swatches-container" aria-label="Selected Colors">
+                        <div id="context-menu">
+                            <div id="delete-swatch">Delete Swatch</div>
+                            <div id="change-color">Change Color</div>
+                        </div>
+                    </div>
+                </section>
+                <canvas id="gradient-display" aria-label="Gradient Display"></canvas>
+                <div id="selected-color-container" style="text-align: center; margin-top: 20px;">
+                    <p id="selected-color-label" style="margin-bottom: 10px;">Selected Color</p>
+                    <div id="selected-color-display" style="width: 100px; height: 50px; margin: 0 auto; border: 1px solid #000;"></div>
                 </div>
             </div>
-        </section>
-        <!-- Section for displaying color gradients -->
-        <section id="gradient-display" aria-label="Gradient Display"></section>
+
+        </div>
         
-    </main>
     <!-- JavaScript file for interactive features -->
     <script src="script.js"></script>
 </body>

@@ -152,6 +152,7 @@ function checkForTouchingSwatches(movedSwatch) {
     if (swatch !== movedSwatch && isTouching(movedSwatch, swatch)) {
       // Create gradient between swatches
       createGradient(movedSwatch, swatch);
+      drawGradient(movedSwatch,swatch);
     }
   });
 }
@@ -171,4 +172,50 @@ function createGradient(a, b) {
   const gradientDisplay = document.getElementById('gradient-display');
   gradientDisplay.style.background = `linear-gradient(${a.style.backgroundColor}, ${b.style.backgroundColor})`;
 }
+
+function drawGradient(a,b) {
+  const canvas = document.getElementById('gradient-display');
+  const ctx = canvas.getContext('2d');
+
+  // Ensure the canvas size matches its display size for accurate color picking
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+
+  // Create the gradient
+  let gradient = ctx.createLinearGradient(0, 0, canvas.width, 0); // Horizontal gradient
+  gradient.addColorStop(0, a.style.backgroundColor); // Start color
+  gradient.addColorStop(1, b.style.backgroundColor); // End color
+
+  // Apply the gradient to the canvas
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+// Call drawGradient() to initially draw the gradient
+window.addEventListener('load', drawGradient);
+
+
+document.getElementById('gradient-display').addEventListener('click', function(e) {
+  const canvas = this;
+  const ctx = canvas.getContext('2d');
+
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const pixel = ctx.getImageData(x, y, 1, 1).data;
+  const color = `rgba(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3] / 255})`;
+
+  displaySelectedColor(color);
+});
+
+
+function displaySelectedColor(color) {
+  const colorDisplay = document.getElementById('selected-color-display');
+  colorDisplay.style.width = '100px'; // Adjust as needed
+  colorDisplay.style.height = '50px'; // Adjust as needed
+  colorDisplay.style.backgroundColor = color;
+}
+
 

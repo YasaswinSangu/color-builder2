@@ -1,7 +1,7 @@
 body, html {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif; /* Updated font to Roboto */
+  font-family: Verdana, Geneva, Tahoma, sans-serif; /* Updated font to Roboto */
   background-color: #b3b8e0; /* Light indigo background */
 }
 
@@ -22,43 +22,46 @@ h1 {
 }
 
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%; /* Adjust width for better control */
-  max-width: 800px; /* Maximum width to avoid too wide on large screens */
-  margin: auto; /* Center the main content */
+h1 + hr {
+  margin-left: calc(-1 * var(--global-padding)); /* Example: Adjust based on actual global padding */
+  margin-right: calc(-1 * var(--global-padding));
+  width: auto;
+  margin-top: 0;
+  margin-bottom: 0px; /* Adjust based on your layout needs */
+  background-color:  #3f51b5; /* Your desired color */
+  height: 2px;
+  border: none;
 }
+
+
 
 #color-selection {
   width: 100%;
-  height: 0.8h; /* Full width of main to align children inside */
+  /* height: 0.8h; seems like a typo. Assuming you meant something like '80vh' for 80% viewport height or just remove it if not needed */
   display: flex;
-  flex-direction: row; /* Align items in a row */
-  justify-content: space-around;
-  align-items: center; /* Vertically center items */
-  margin-bottom: 40px; /* Increased bottom margin */
+  flex-direction: column; /* Align items vertically */
+  align-items: center; /* Center items horizontally */
+  justify-content: space-around; /* Distribute space */
+  margin-bottom: 40px;
   padding: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
-  border-radius: 8px; /* Rounded corners */
-  background-color: #ffffff; /* White background */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background-color: #3f51b5; /* Assuming you want this indigo background */
 }
 
 #swatches-container {
-  width: 70%; /* Adjusted width */
-  border: 2px solid #33419a; /* Darker border */
-  margin: 0;
+  width: 70%; /* Adjust based on design needs, especially if #color-selection uses flex-direction: column */
+  border: 2px solid #33419a;
+  margin-top: 20px; /* Ensure space between this container and any preceding content */
   padding: 20px;
-  display: flex; /* Use flexbox for inner items */
-  flex-wrap: wrap; /* Allow items to wrap */
-  justify-content: flex-start; /* Align items to the start */
-  gap: 10px; /* Space between swatches */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
   min-height: 150px;
-  background-color: #e8eaf6; /* Lighter indigo background */
+  background-color: #e8eaf6;
   border-radius: 8px;
   position: relative;
-   margin-top: 20px; /* Rounded corners */
 }
 
 #colorPicker {
@@ -70,6 +73,7 @@ main {
 }
 
 #gradient-display {
+  cursor :grabbing;
   width: 100%; /* Full width of main */
   height: 200px;
   margin-top: 20px; /* Space from the above section */
@@ -99,24 +103,6 @@ main {
   color :#b3b8e0;  /* Adjusted font color to match indigo theme */
    /* Change to your desired font color */
 }
-
-#color-selection {
-  /* Existing styles */
-  background-color:  #3f51b5;
-  display: flex;
-  flex-direction: column; /* Change to column layout */
-  align-items: center; /* Center items horizontally */
-}
-
-#swatches-container {
-  /* Existing styles */
-  width: 70%;
-  background-color:  #b3b8e0; 
-  position: relative;
-  /* Adjust margin to provide space between label and container */
-  margin-top: 20px;
-}
-
 
 
 #context-menu {
@@ -150,3 +136,47 @@ main {
   background-color: #eaeaea; /* Slightly darker background when clicked */
 }
 
+
+
+.content-wrapper {
+  display: flex;
+  width: 100%; /* Ensure the wrapper takes the full width */
+  height: auto; /* Adjust height automatically based on content */
+}
+
+.left-content, .right-content {
+  padding: 20px;
+  width: calc(50% - 40px); /* Adjust width to account for padding */
+}
+
+/* Left content styling */
+.left-content {
+  flex: 0.35;
+  border-right: 3px solid  #3f51b5;
+    padding-right: 20px; /* Padding inside the left content for spacing */
+  
+}
+
+/* Right content styling */
+.right-content {
+  flex: 0.65;
+  padding-left: 20px;
+  /* Padding inside the right content for spacing */
+}
+
+#selected-color-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#selected-color-label {
+  margin-bottom: 10px;
+}
+
+#selected-color-display {
+  width: 100px;
+  height: 50px;
+  margin: 0 auto; /* Center the box */
+  border: 1px solid #000; /* Add a border to make the box visible */
+  display: inline-block; /* Allows block-level elements to be centered with text-align */
+}
