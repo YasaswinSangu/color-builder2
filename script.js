@@ -1,3 +1,5 @@
+let currentSwatch = null; 
+
 document.getElementById('swatches-container').addEventListener('click', function(e) {
     // Ensure this is a left-click and not inside an existing swatch
     if (e.button === 0 && e.target === this) { // `0` is the button value for left-click
@@ -10,6 +12,7 @@ document.getElementById('swatches-container').addEventListener('click', function
 });
 
 function createSwatch(color, x, y, container) {
+    
     const swatch = document.createElement('div');
     swatch.classList.add('swatch');
     swatch.style.backgroundColor = color;
@@ -18,15 +21,15 @@ function createSwatch(color, x, y, container) {
     swatch.style.top = `${y}px`;
     container.appendChild(swatch);
     makeDraggable(swatch, container);
-
+    currentSwatch = swatch;
     // Add contextmenu event listener to each swatch for custom context menu
     swatch.addEventListener('contextmenu', function(event) {
       event.preventDefault(); // Prevent default context menu
-      showContextMenu(event, swatch); // Pass the swatch element
+      showContextMenu(event, this); // Pass the swatch element
   });
 }
 
-let currentSwatch = null; // Global variable to keep track of the current swatch
+// Global variable to keep track of the current swatch
 
 function showContextMenu(event, swatch) {
     currentSwatch = swatch; // Store the current swatch for later use
@@ -46,18 +49,23 @@ function showContextMenu(event, swatch) {
 
 document.getElementById('change-color').addEventListener('click', function() {
   if (currentSwatch) {
-      // Simulate a click on the color picker
-      document.getElementById('colorPicker').click();
-      hideContextMenu(); // Hide the context menu
+
+    document.getElementById('colorPicker').click();
+    hideContextMenu(); 
   }
 });
 
+// Corrected to include 'e' parameter in the function
 document.getElementById('colorPicker').addEventListener('input', function(e) {
   if (currentSwatch) {
-      // Update the current swatch's color with the selected color
       currentSwatch.style.backgroundColor = e.target.value;
+      // Here, add any logic to update the associated gradient if needed
+      console.log("Color updated for selected swatch."); 
+  } else {
+      console.log("No swatch selected for color update."); 
   }
 });
+
 
 document.getElementById('delete-swatch').addEventListener('click', function() {
     if (currentSwatch) {
@@ -66,11 +74,11 @@ document.getElementById('delete-swatch').addEventListener('click', function() {
     }
 });
 
-
 document.addEventListener('click', function(event) {
-    // Hide the context menu if clicking outside a swatch
-    if (!event.target.classList.contains('swatch') && !event.target.closest('#context-menu')) {
+  // Hide the context menu if clicking outside a swatch or context menu
+  if (!event.target.closest('.swatch') && !event.target.closest('#context-menu')) {
       hideContextMenu();
+      //currentSwatch = null; // Consider resetting currentSwatch here if appropriate
   }
 });
 
@@ -84,7 +92,8 @@ document.addEventListener('contextmenu', function(event) {
 function hideContextMenu() {
   const contextMenu = document.getElementById('context-menu');
   contextMenu.style.display = 'none';
-  currentSwatch = null; // Reset currentSwatch when the context menu is hidden
+  // Reset currentSwatch only if you want to clear the selection after each action
+  // currentSwatch = null;
 }
 
 function makeDraggable(swatch, container) {
