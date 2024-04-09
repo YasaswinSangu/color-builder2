@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Color Playground</title>
-<link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Builder</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<input type="color" id="colorPicker">
-<div id="playground"></div>
-
-<script src="script.js"></script> <!-- Link to your JavaScript file -->
+    <header>
+        <!-- Providing context about the project -->
+        HCI Project | Yasaswini Reddy S | 2020B1A71892P
+    </header>
+    <h1>Color Builder</h1>
+    <main>
+        <section id="color-selection">
+            <!-- Label for color picker -->
+            <label for="colorPicker">Select Color Swatches</label>
+            <!-- Input for selecting a color -->
+            <input type="color" id="colorPicker" aria-label="Color Picker">
+            <!-- Swatch container -->
+            <div id="swatches-container" aria-label="Selected Colors">
+                <!-- Context menu -->
+                <div id="context-menu">
+                    <div id="delete-swatch">Delete Swatch</div>
+                    <div id="change-color">Change Color</div>
+                </div>
+            </div>
+        </section>
+        <!-- Section for displaying color gradients -->
+        <section id="gradient-display" aria-label="Gradient Display"></section>
+        
+    </main>
+    <!-- JavaScript file for interactive features -->
+    <script src="script.js"></script>
 </body>
 </html>
+
+

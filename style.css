@@ -1,13 +1,151 @@
-#playground {
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; /* Updated font to Roboto */
+  background-color: #b3b8e0; /* Light indigo background */
+}
+
+header {
+  background-color: #3f51b5; /* Indigo header color */
+  color: #dce6e7; /* White text for better readability */
+  padding: 20px;
+  text-align: center;
+  font-family :Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px; /* Slightly larger font for better visibility */
+}
+
+h1 {
+  color: #29365f; /* White color for header */
+  text-align: center;
+  font-family :Verdana, Geneva, Tahoma, sans-serif;
+  margin: 40px 0; /* Increased margin for better spacing */
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%; /* Adjust width for better control */
+  max-width: 800px; /* Maximum width to avoid too wide on large screens */
+  margin: auto; /* Center the main content */
+}
+
+#color-selection {
   width: 100%;
-  height: 400px;
-  border: 1px solid #000;
-  position: relative; /* Allows absolute positioning inside */
+  height: 0.8h; /* Full width of main to align children inside */
+  display: flex;
+  flex-direction: row; /* Align items in a row */
+  justify-content: space-around;
+  align-items: center; /* Vertically center items */
+  margin-bottom: 40px; /* Increased bottom margin */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #ffffff; /* White background */
+}
+
+#swatches-container {
+  width: 70%; /* Adjusted width */
+  border: 2px solid #33419a; /* Darker border */
+  margin: 0;
+  padding: 20px;
+  display: flex; /* Use flexbox for inner items */
+  flex-wrap: wrap; /* Allow items to wrap */
+  justify-content: flex-start; /* Align items to the start */
+  gap: 10px; /* Space between swatches */
+  min-height: 150px;
+  background-color: #e8eaf6; /* Lighter indigo background */
+  border-radius: 8px;
+  position: relative;
+   margin-top: 20px; /* Rounded corners */
+}
+
+#colorPicker {
+  height: 50px; /* Adjusted height for consistency */
+  width: 50px; /* Square shape */
+  border-radius: 50%; /* Circle shape */
+  border: 2px solid #ccc; /* Subtle border */
+  cursor: pointer; /* Indicate clickable */
+}
+
+#gradient-display {
+  width: 100%; /* Full width of main */
+  height: 200px;
+  margin-top: 20px; /* Space from the above section */
+  background-image: linear-gradient(to right, #f7f7f7, #fafafa); /* Gradient from indigo to dark indigo */
+  border: 2px solid #303f9f; /* Darker border */
+  border-radius: 8px; 
+  margin-bottom: 20px;/* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
 }
 
 .swatch {
   width: 50px;
   height: 50px;
   position: absolute;
-  cursor: move; /* Indicates movable items */
+  cursor: grab;
+  border-radius: 4px; /* Slightly rounded corners for the swatches */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Soft shadow for the swatches */
+}
+
+#color-selection label {
+  font-family :Verdana, Geneva, Tahoma, sans-serif;
+  
+  /* Updated font to Roboto */
+  display: flex;
+  flex-direction: column; /* Change to column layout */
+  align-items: center; 
+  color :#b3b8e0;  /* Adjusted font color to match indigo theme */
+   /* Change to your desired font color */
+}
+
+#color-selection {
+  /* Existing styles */
+  background-color:  #3f51b5;
+  display: flex;
+  flex-direction: column; /* Change to column layout */
+  align-items: center; /* Center items horizontally */
+}
+
+#swatches-container {
+  /* Existing styles */
+  width: 70%;
+  background-color:  #b3b8e0; 
+  position: relative;
+  /* Adjust margin to provide space between label and container */
+  margin-top: 20px;
+}
+
+
+
+#context-menu {
+  display: none;
+  position: absolute; /* Positions the context menu within the relative parent */
+  z-index: 100; /* Ensures the context menu appears above other elements */
+  background-color: #ffffff; /* Background color */
+  border: 1px solid #ddd; /* Border color */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Adds a subtle shadow for depth */
+  border-radius: 5px; /* Softens the corners */
+  padding: 10px; /* Gives some space around the contents */
+  width: 200px; /* Specifies a fixed width for the menu */
+  box-sizing: border-box; /* Ensures padding doesn't affect the set width */
+}
+
+#context-menu div {
+  padding: 8px 10px; /* Padding inside each menu item for touchability */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: background-color 0.2s; /* Smooth transition for background color */
+}
+
+#context-menu div:hover {
+  background-color: #f7f7f7; /* Light background on hover for feedback */
+}
+
+#context-menu div:not(:last-child) {
+  border-bottom: 1px solid #eee; /* Separates items */
+}
+
+#context-menu div:active {
+  background-color: #eaeaea; /* Slightly darker background when clicked */
 }

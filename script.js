@@ -1,52 +1,141 @@
-document.getElementById('colorPicker').addEventListener('change', function() {
-  createSwatch(this.value);
+document.getElementById('swatches-container').addEventListener('click', function(e) {
+    // Ensure this is a left-click and not inside an existing swatch
+    if (e.button === 0 && e.target === this) { // `0` is the button value for left-click
+        const color = document.getElementById('colorPicker').value;
+        const containerRect = this.getBoundingClientRect();
+        let x = e.clientX - containerRect.left + this.scrollLeft;
+        let y = e.clientY - containerRect.top + this.scrollTop;
+        createSwatch(color, x, y, this);
+    }
 });
 
-function createSwatch(color) {
-  const swatch = document.createElement('div');
-  swatch.classList.add('swatch');
-  swatch.style.backgroundColor = color;
-  swatch.style.top = `${Math.random() * 350}px`; // Random initial position
-  swatch.style.left = `${Math.random() * (document.getElementById('playground').clientWidth - 50)}px`;
-  document.getElementById('playground').appendChild(swatch);
-  makeDraggable(swatch);
+function createSwatch(color, x, y, container) {
+    const swatch = document.createElement('div');
+    swatch.classList.add('swatch');
+    swatch.style.backgroundColor = color;
+    swatch.style.position = 'absolute'; // Ensure this is set for positioning
+    swatch.style.left = `${x}px`;
+    swatch.style.top = `${y}px`;
+    container.appendChild(swatch);
+    makeDraggable(swatch, container);
+
+    // Add contextmenu event listener to each swatch for custom context menu
+    swatch.addEventListener('contextmenu', function(event) {
+      event.preventDefault(); // Prevent default context menu
+      showContextMenu(event, swatch); // Pass the swatch element
+  });
 }
 
-function makeDraggable(elem) {
-  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  elem.onmousedown = dragMouseDown;
+let currentSwatch = null; // Global variable to keep track of the current swatch
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // Get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // Call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
+function showContextMenu(event, swatch) {
+    currentSwatch = swatch; // Store the current swatch for later use
+    const contextMenu = document.getElementById('context-menu');
+    const offsetParentRect = swatch.offsetParent.getBoundingClientRect();
+    const swatchRect = swatch.getBoundingClientRect();
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // Calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // Set the element's new position:
-    elem.style.top = (elem.offsetTop - pos2) + "px";
-    elem.style.left = (elem.offsetLeft - pos1) + "px";
-    checkForTouchingSwatches(elem);
-  }
+    const topPosition = swatchRect.top - offsetParentRect.top + swatch.offsetHeight;
+    const leftPosition = swatchRect.left - offsetParentRect.left;
 
-  function closeDragElement() {
-    // Stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
+    contextMenu.style.display = 'block';
+    contextMenu.style.top = `${topPosition}px`;
+    contextMenu.style.left = `${leftPosition}px`;
+
+    event.preventDefault();
 }
+
+document.getElementById('change-color').addEventListener('click', function() {
+  if (currentSwatch) {
+      // Simulate a click on the color picker
+      document.getElementById('colorPicker').click();
+      hideContextMenu(); // Hide the context menu
+  }
+});
+
+document.getElementById('colorPicker').addEventListener('input', function(e) {
+  if (currentSwatch) {
+      // Update the current swatch's color with the selected color
+      currentSwatch.style.backgroundColor = e.target.value;
+  }
+});
+
+document.getElementById('delete-swatch').addEventListener('click', function() {
+    if (currentSwatch) {
+        currentSwatch.remove(); // Remove the swatch from the DOM
+        hideContextMenu(); // Hide the context menu after deleting the swatch
+    }
+});
+
+
+document.addEventListener('click', function(event) {
+    // Hide the context menu if clicking outside a swatch
+    if (!event.target.classList.contains('swatch') && !event.target.closest('#context-menu')) {
+      hideContextMenu();
+  }
+});
+
+document.addEventListener('contextmenu', function(event) {
+    // Prevent the default context menu globally unless it's on a swatch
+    if (!event.target.classList.contains('swatch')) {
+        event.preventDefault();
+    }
+});
+
+function hideContextMenu() {
+  const contextMenu = document.getElementById('context-menu');
+  contextMenu.style.display = 'none';
+  currentSwatch = null; // Reset currentSwatch when the context menu is hidden
+}
+
+function makeDraggable(swatch, container) {
+  let startPosX = 0, startPosY = 0, origX = 0, origY = 0;
+  let isDragging = false;
+
+  swatch.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+
+      isDragging = true;
+      startPosX = e.clientX;
+      startPosY = e.clientY;
+      origX = swatch.offsetLeft;
+      origY = swatch.offsetTop;
+
+      // Change the cursor to 'grabbing' to indicate dragging
+      swatch.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+
+      let newX = origX + e.clientX - startPosX;
+      let newY = origY + e.clientY - startPosY;
+
+      // Calculate the container's bounds
+      const rect = container.getBoundingClientRect();
+
+      // Constrain the swatch within the container's bounds
+      if (newX < 0 || newY < 0 || newX + swatch.offsetWidth > rect.width || newY + swatch.offsetHeight > rect.height) {
+          // If out of bounds, show a cross cursor
+          swatch.style.cursor = 'not-allowed';
+      } else {
+          // If within bounds, update the position and show a grabbing cursor
+          swatch.style.left = `${newX}px`;
+          swatch.style.top = `${newY}px`;
+          swatch.style.cursor = 'grabbing';
+      }
+  });
+
+  document.addEventListener('mouseup', function() {
+      if (isDragging) {
+          isDragging = false;
+          // Revert cursor to 'grab' after dragging is done
+          swatch.style.cursor = 'grab';
+          checkForTouchingSwatches(swatch);
+
+      }
+  });
+}
+
 
 function checkForTouchingSwatches(movedSwatch) {
   const swatches = document.querySelectorAll('.swatch');
@@ -69,9 +158,8 @@ function isTouching(a, b) {
 }
 
 function createGradient(a, b) {
-  // This is a placeholder for gradient creation logic.
-  // You will need to customize this function based on how you want to visualize the gradient effect.
-  console.log('Create gradient between', a.style.backgroundColor, 'and', b.style.backgroundColor);
-  // Example: Update playground background with gradient
-  document.getElementById('playground').style.background = `linear-gradient(${a.style.backgroundColor}, ${b.style.backgroundColor})`;
+  // Adjust this to show the gradient in the 'gradient-display' area
+  const gradientDisplay = document.getElementById('gradient-display');
+  gradientDisplay.style.background = `linear-gradient(${a.style.backgroundColor}, ${b.style.backgroundColor})`;
 }
+
