@@ -8,31 +8,28 @@
 </head>
 <body>
     <header>
-        <!-- Providing context about the project -->
         HCI Project | Yasaswini Reddy S | 2020B1A71892P
     </header>
     <h1>COLOR BUILDER</h1>
     <hr>
         <div class="content-wrapper">
-            <!-- Left side content -->
             <div class="left-content">
-                <p>Here's some text on the left side of the screen.
-                     You can place any content you want here, like an introduction to your color builder tool or 
-                     instructions on how to use it.Here's some text on the left side of the screen.
-                     You can place any content you want here, like an introduction to your color builder tool or 
-                     instructions on how to use it.Here's some text on the left side of the screen.
-                     You can place any content you want here, like an introduction to your color builder tool or 
-                     instructions on how to use it.Here's some text on the left side of the screen.
-                     You can place any content you want here, like an introduction to your color builder tool or 
-                     instructions on how to use it.Here's some text on the left side of the screen.
-                     You can place any content you want here, like an introduction to your color builder tool or 
-                     instructions on how to use it.</p>
+                    <h2>Welcome to Color Builder!</h2>
+                    <p>Follow these simple steps to create your custom color scheme:</p>
+                    <ol>
+                        <li><strong>Select a Color:</strong> Use the color picker to choose your initial color. This will be the base for your first swatch.</li>
+                        <li><strong>Create a Swatch:</strong> Click or tap on the swatch display area below the color picker to create a new swatch with your selected color.</li>
+                        <li><strong>Manipulate Swatches:</strong> Drag and drop swatches within the display area to organize your palette. Swatches that touch will automatically generate a gradient in the gradient display area.</li>
+                        <li><strong>Pick From Gradient:</strong> Click on the gradient display to select a color from the generated gradient. Your chosen color will be shown in the selected color display box.</li>
+                        <li><strong>Adjust Swatch Colors:</strong> Right-click on a swatch to open the context menu. Choose 'Change Color' to adjust the swatch's color or 'Delete Swatch' to remove it.</li>
+                        <li><strong>Experiment and Explore:</strong> Feel free to experiment with different colors and swatch arrangements. The Color Builder tool is designed for playful exploration and discovery of perfect color schemes.</li>
+                    </ol>
+                
             </div>
         
-            <!-- Right side content (color selection and swatches container) -->
             <div class="right-content">
                 <section id="color-selection">
-                    <label for="colorPicker">Select Color Swatches</label>
+                    <label for="colorPicker">SELECT COLOR SWATCHES</label>
                     <input type="color" id="colorPicker" aria-label="Color Picker">
                     <div id="swatches-container" aria-label="Selected Colors">
                         <div id="context-menu">
@@ -41,16 +38,16 @@
                         </div>
                     </div>
                 </section>
+                <h2> Gradient Display : <h2>
                 <canvas id="gradient-display" aria-label="Gradient Display"></canvas>
-                <div id="selected-color-container" style="text-align: center; margin-top: 20px;">
-                    <p id="selected-color-label" style="margin-bottom: 10px;">Selected Color</p>
-                    <div id="selected-color-display" style="width: 100px; height: 50px; margin: 0 auto; border: 1px solid #000;"></div>
+                <div id="selected-color-container">
+                    <p id="selected-color-label">Selected Color</p>
+                    <div id="selected-color-display"></div>
                 </div>
             </div>
 
         </div>
         
-    <!-- JavaScript file for interactive features -->
     <script src="script.js"></script>
 </body>
 </html>

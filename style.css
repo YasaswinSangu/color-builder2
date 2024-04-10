@@ -1,34 +1,50 @@
 body, html {
   margin: 0;
   padding: 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif; /* Updated font to Roboto */
-  background-color: #b3b8e0; /* Light indigo background */
+  font-family: Verdana, Geneva, Tahoma, sans-serif; 
+  background-color: #b3b8e0;
 }
 
 header {
-  background-color: #3f51b5; /* Indigo header color */
-  color: #dce6e7; /* White text for better readability */
+  background-color: #3f51b5; 
+  color: #dce6e7;
   padding: 20px;
   text-align: center;
   font-family :Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 18px; /* Slightly larger font for better visibility */
+  font-size: 18px; 
 }
 
 h1 {
-  color: #29365f; /* White color for header */
+  color: #29365f;
   text-align: center;
   font-family :Verdana, Geneva, Tahoma, sans-serif;
-  margin: 40px 0; /* Increased margin for better spacing */
+  margin: 40px 0;
 }
 
+h2 {
+  font-size: 24px;
+  color:#222c4e;
+  text-align: center; 
+}
+
+p {
+  
+  color:#1c2441; 
+  text-align: center; 
+}
+
+ol {
+  
+  color:#1c2441;
+}
 
 h1 + hr {
-  margin-left: calc(-1 * var(--global-padding)); /* Example: Adjust based on actual global padding */
+  margin-left: calc(-1 * var(--global-padding)); 
   margin-right: calc(-1 * var(--global-padding));
   width: auto;
   margin-top: 0;
-  margin-bottom: 0px; /* Adjust based on your layout needs */
-  background-color:  #3f51b5; /* Your desired color */
+  margin-bottom: 0px; 
+  background-color:  #3f51b5;
   height: 2px;
   border: none;
 }
@@ -37,22 +53,21 @@ h1 + hr {
 
 #color-selection {
   width: 100%;
-  /* height: 0.8h; seems like a typo. Assuming you meant something like '80vh' for 80% viewport height or just remove it if not needed */
   display: flex;
-  flex-direction: column; /* Align items vertically */
-  align-items: center; /* Center items horizontally */
-  justify-content: space-around; /* Distribute space */
+  flex-direction: column;
+  align-items: center; 
+  justify-content: space-around; 
   margin-bottom: 40px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   border-radius: 8px;
-  background-color: #3f51b5; /* Assuming you want this indigo background */
+  background-color: #3f51b5;
 }
 
 #swatches-container {
-  width: 70%; /* Adjust based on design needs, especially if #color-selection uses flex-direction: column */
+  width: 70%; 
   border: 2px solid #33419a;
-  margin-top: 20px; /* Ensure space between this container and any preceding content */
+  margin-top: 20px;
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -65,23 +80,22 @@ h1 + hr {
 }
 
 #colorPicker {
-  height: 50px; /* Adjusted height for consistency */
-  width: 50px; /* Square shape */
-  border-radius: 50%; /* Circle shape */
-  border: 2px solid #ccc; /* Subtle border */
-  cursor: pointer; /* Indicate clickable */
+  height: 50px; 
+  width: 50px;
+  border: 0.3px solid #ccc; 
+  cursor: pointer;
 }
 
 #gradient-display {
   cursor :grabbing;
-  width: 100%; /* Full width of main */
-  height: 200px;
-  margin-top: 20px; /* Space from the above section */
-  background-image: linear-gradient(to right, #f7f7f7, #fafafa); /* Gradient from indigo to dark indigo */
-  border: 2px solid #303f9f; /* Darker border */
+  width: 100%; 
+  height: 100px;
+  margin-top: 20px;
+  background-image: linear-gradient(to right, #f7f7f7, #fafafa);
+  border: 2px solid #303f9f;
   border-radius: 8px; 
-  margin-bottom: 20px;/* Rounded corners */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
 }
 
 .swatch {
@@ -89,84 +103,82 @@ h1 + hr {
   height: 50px;
   position: absolute;
   cursor: grab;
-  border-radius: 4px; /* Slightly rounded corners for the swatches */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Soft shadow for the swatches */
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2); 
 }
 
 #color-selection label {
   font-family :Verdana, Geneva, Tahoma, sans-serif;
-  
-  /* Updated font to Roboto */
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column; /* Change to column layout */
+  flex-direction: column; 
   align-items: center; 
-  color :#b3b8e0;  /* Adjusted font color to match indigo theme */
-   /* Change to your desired font color */
+  color :#b3b8e0;  
 }
 
 
 #context-menu {
   display: none;
-  position: absolute; /* Positions the context menu within the relative parent */
-  z-index: 100; /* Ensures the context menu appears above other elements */
-  background-color: #ffffff; /* Background color */
-  border: 1px solid #ddd; /* Border color */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Adds a subtle shadow for depth */
-  border-radius: 5px; /* Softens the corners */
-  padding: 10px; /* Gives some space around the contents */
-  width: 200px; /* Specifies a fixed width for the menu */
-  box-sizing: border-box; /* Ensures padding doesn't affect the set width */
+  position: absolute; 
+  z-index: 100; 
+  background-color: #ffffff; 
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  border-radius: 5px; 
+  padding: 10px; 
+  width: 200px;
+  box-sizing: border-box; 
 }
 
 #context-menu div {
-  padding: 8px 10px; /* Padding inside each menu item for touchability */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  transition: background-color 0.2s; /* Smooth transition for background color */
+  padding: 8px 10px; 
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 #context-menu div:hover {
-  background-color: #f7f7f7; /* Light background on hover for feedback */
+  background-color: #f7f7f7; 
 }
 
 #context-menu div:not(:last-child) {
-  border-bottom: 1px solid #eee; /* Separates items */
+  border-bottom: 1px solid #eee;
 }
 
 #context-menu div:active {
-  background-color: #eaeaea; /* Slightly darker background when clicked */
+  background-color: #eaeaea; 
 }
 
 
 
 .content-wrapper {
   display: flex;
-  width: 100%; /* Ensure the wrapper takes the full width */
-  height: auto; /* Adjust height automatically based on content */
+  width: 100%; 
+  height: auto; 
 }
 
 .left-content, .right-content {
   padding: 20px;
-  width: calc(50% - 40px); /* Adjust width to account for padding */
+  width: calc(50% - 40px);
 }
 
-/* Left content styling */
 .left-content {
   flex: 0.35;
   border-right: 3px solid  #3f51b5;
-    padding-right: 20px; /* Padding inside the left content for spacing */
+    padding-right: 20px; 
   
 }
 
-/* Right content styling */
 .right-content {
   flex: 0.65;
   padding-left: 20px;
-  /* Padding inside the right content for spacing */
+ 
 }
 
 #selected-color-container {
   text-align: center;
   margin-top: 20px;
+  
+ 
 }
 
 #selected-color-label {
@@ -176,7 +188,8 @@ h1 + hr {
 #selected-color-display {
   width: 100px;
   height: 50px;
-  margin: 0 auto; /* Center the box */
-  border: 1px solid #000; /* Add a border to make the box visible */
-  display: inline-block; /* Allows block-level elements to be centered with text-align */
+  margin: 0 auto; 
+  border: 1px solid #000; 
+  display: inline-block;
+  background-color: #f7f7f7; 
 }
